@@ -13,10 +13,10 @@ from typing import List, Type
 
 from sqlalchemy.orm import Session
 
-from . import models
-from . import schemas
-from .database import engine, async_session
-from module_26_fastapi.homework.models import Recipe
+import models
+import schemas
+from database import engine, async_session
+from models import Recipe
 
 
 @asynccontextmanager
