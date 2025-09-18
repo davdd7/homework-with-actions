@@ -30,7 +30,7 @@ jobs:
         run: pytest tests
 
       - name: Run mypy
-        run: mypy **/*.py
+        run: mypy *.py tests/*.py
     
       - name: Run black check
         run: black --diff --check .
