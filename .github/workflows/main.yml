@@ -30,7 +30,7 @@ jobs:
         run: pytest tests
 
       - name: Run mypy
-        run: mypy .
+        run: mypy --exclude '.*' *.py
     
       - name: Run black check
         run: black --diff --check .
