@@ -30,7 +30,7 @@ jobs:
         run: pytest tests
 
       - name: Run mypy
-        run: mypy . --ignore-missing-imports
+        run: mypy .
     
       - name: Run black check
         run: black --diff --check .
