@@ -6,3 +6,5 @@ isort==5.9.3
 mypy==0.931
 pytest==7.0.1
 fastapi~=0.116.1
+httpx~=0.28.1
+SQLAlchemy~=2.0.40
