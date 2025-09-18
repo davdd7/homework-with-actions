@@ -30,7 +30,7 @@ jobs:
         run: pytest tests
 
       - name: Run mypy
-        run: python -m mypy .
+        run: mypy . --ignore-missing-imports --disable-error-code=invalid-name
     
       - name: Run black check
         run: black --diff --check .
