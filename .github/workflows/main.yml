@@ -1,7 +1,6 @@
 on:
   pull_request:
-    branches:
-    - main
+    branches: [ main, master ]
 
 jobs:
   test:
@@ -29,16 +28,13 @@ jobs:
         run: pytest tests
 
       - name: Run mypy
-        run: mypy .  # Проверка типов во всем проекте
+        run: mypy .
     
-    # Шаг 6: Запуск black (проверка форматирования)
       - name: Run black check
-        run: black --diff --check .  # Проверка форматирования без изменений
+        run: black --diff --check .
     
-    # Шаг 7: Запуск isort (проверка сортировки импортов)
       - name: Run isort check
-        run: isort --check-only .  # Проверка сортировки импортов
-    
-    # Шаг 8: Запуск flake8 (проверка стиля кода)
+        run: isort --check-only .  
+        
       - name: Run flake8
-        run: flake8 .  # Проверка стиля кода по PEP8
+        run: flake8 . 
