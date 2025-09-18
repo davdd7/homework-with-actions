@@ -26,6 +26,11 @@ jobs:
           pip install -r requirements.txt
           pip install aiosqlite
 
+      - name: Create __init__.py files
+        run: |
+          touch ./__init__.py
+          touch ./tests/__init__.py
+
       - name: Run pytest
         run: pytest tests
 
