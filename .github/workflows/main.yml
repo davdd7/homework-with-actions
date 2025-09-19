@@ -25,13 +25,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install aiosqlite
+          pip install --upgrade mypy
 
       - name: Run pytest
         run: pytest tests
 
       - name: Run mypy
         run: |
-          pip install --upgrade mypy
+          
           python -m mypy src/main.py
     
       - name: Run black check
