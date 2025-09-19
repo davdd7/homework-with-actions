@@ -31,12 +31,11 @@ jobs:
 
       - name: Run mypy
         run: |
-          CURRENT_DIR=$(pwd)
           cd ..
 
           mv homework-with-actions homework_with_actions
           cd homework_with_actions
-          python -m mypy src/
+          python -m mypy src/ tests/
     
       - name: Run black check
         run: black --diff --check .
