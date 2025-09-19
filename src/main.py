@@ -17,7 +17,7 @@ from sqlalchemy.orm import Session
 from src import models
 
 from src.database import engine, async_session
-from models import Recipe
+from src.models import Recipe
 
 
 @asynccontextmanager
