@@ -30,7 +30,9 @@ jobs:
         run: pytest tests
 
       - name: Run mypy
-        run: python -m mypy src/main.py
+        run: |
+          pip install --upgrade mypy
+          python -m mypy src/main.py
     
       - name: Run black check
         run: black --diff --check .
