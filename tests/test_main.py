@@ -28,7 +28,7 @@ def test_bd(client, db_session):
 
     db_session.commit()
 
-    from src.models import Recipe
+    from homework_with_actions.src.models import Recipe
 
     recipe = db_session.query(Recipe).first()
 

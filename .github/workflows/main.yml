@@ -30,15 +30,7 @@ jobs:
         run: pytest tests
 
       - name: Run mypy
-        run: |
-          cd ..
-
-          mv homework-with-actions homework_with_actions
-          cd homework_with_actions
-          dir
-          python -m mypy src/main.py
-
-          mv homework_with_actions homework-with-actions
+        run: python -m mypy src/main.py
     
       - name: Run black check
         run: black --diff --check .

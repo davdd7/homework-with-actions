@@ -2,15 +2,9 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from pathlib import Path
-import sys
 
-current_dir = Path(__file__).parent
-root_dir = current_dir.parent
-sys.path.insert(0, str(root_dir))
-
-from src.main import app, get_db
-from src.database import Base
+from homework_with_actions.src.main import app, get_db
+from homework_with_actions.src.database import Base
 
 
 TEST_DATABASE_URL = "sqlite:///:memory:"
