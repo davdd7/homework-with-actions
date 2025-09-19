@@ -46,7 +46,7 @@ async def get_db() -> Session:
           response_model=RecipesIn,
           status_code=status.HTTP_201_CREATED)
 async def post_recipes(recipe: RecipesIn,
-                       db: AsyncSession = Depends(get_db)) -> models.Recipe:
+                       db: AsyncSession = Depends(get_db)) -> Recipe:
     """
     Отправка нового рецепта
     @param recipe: рецепт
