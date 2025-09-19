@@ -2,7 +2,6 @@ from fastapi import FastAPI, Depends, HTTPException, Path, status
 from sqlalchemy import desc
 
 
-
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
@@ -12,7 +11,11 @@ from typing import List, Type, AsyncGenerator
 
 from sqlalchemy.orm import Session
 
-from homework_with_actions.src.schemas import RecipesIn, RecipesFirstPage, RecipesSecondPage
+from homework_with_actions.src.schemas import (
+    RecipesIn,
+    RecipesFirstPage,
+    RecipesSecondPage,
+)
 from homework_with_actions.src.database import engine, async_session
 from homework_with_actions.src.models import Recipe, Base
 
@@ -42,11 +45,8 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
         async with session.begin():
             yield session
 
-@app.post('/recipes',
-          response_model=RecipesIn,
-          status_code=status.HTTP_201_CREATED)
-async def post_recipes(recipe: RecipesIn,
-                       db: AsyncSession = Depends(get_db)) -> Recipe:
+@app.post("/recipes", response_model=RecipesIn, status_code=status.HTTP_201_CREATED)
+async def post_recipes(recipe: RecipesIn, db: AsyncSession = Depends(get_db)) -> Recipe:
     """
     Отправка нового рецепта
     @param recipe: рецепт
@@ -58,7 +58,7 @@ async def post_recipes(recipe: RecipesIn,
     return new_recipe
 
 
-@app.get('/recipes', response_model=List[RecipesFirstPage])
+@app.get("/recipes", response_model=List[RecipesFirstPage])
 async def recipes_first_page(db: AsyncSession = Depends(get_db)) -> List[Recipe | None]:
     """
     Получение списка рецептов с сортировкой
@@ -70,7 +70,7 @@ async def recipes_first_page(db: AsyncSession = Depends(get_db)) -> List[Recipe 
     return list(recipe.scalars().all())
 
 
-@app.get('/recipes/{id}', response_model=RecipesSecondPage)
+@app.get("/recipes/{id}", response_model=RecipesSecondPage)
 async def recipes_second_page(id: int = Path(..., title='ID Рецепта в БД', ge=0),
                               db: AsyncSession = Depends(get_db)) -> Recipe | None:
     """
@@ -81,7 +81,9 @@ async def recipes_second_page(id: int = Path(..., title='ID Рецепта в Б
     """
     recipe = await db.get(Recipe, id, with_for_update=True)
     if not recipe:
-        raise HTTPException(status_code=404, detail='Recipe with id "{}" not found'.format(id))
+        raise HTTPException(
+            status_code=404, detail="Recipe with id '{}' not found".format(id)
+        )
 
     recipe.show_count += 1
 

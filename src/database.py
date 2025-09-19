@@ -3,8 +3,10 @@ from sqlalchemy.orm import sessionmaker, DeclarativeBase
 
 DATABASE_URL = "sqlite+aiosqlite:///./app.py.db"
 
+
 class Base(DeclarativeBase):
     pass
+
 
 engine = create_async_engine(DATABASE_URL, echo=True)
 

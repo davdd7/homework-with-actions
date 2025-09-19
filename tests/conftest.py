@@ -12,6 +12,7 @@ TEST_DATABASE_URL = "sqlite:///:memory:"
 engine = create_engine(TEST_DATABASE_URL)
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
+
 @pytest.fixture(scope='session')
 def setup_db():
     Base.metadata.create_all(bind=engine)
@@ -46,5 +47,3 @@ def client(db_session):
         yield client
 
     app.dependency_overrides.clear()
-
-

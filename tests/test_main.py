@@ -7,7 +7,7 @@ def test_create_item(client):
             'description': 'testim test',
             'cooking_time': 15,
             'show_count': 0
-        }
+        },
     )
     assert response.status_code == 201
     data = response.json()
@@ -23,7 +23,7 @@ def test_bd(client, db_session):
             'description': 'testim test',
             'cooking_time': 15,
             'show_count': 0
-        }
+        },
     )
 
     db_session.commit()
@@ -31,5 +31,6 @@ def test_bd(client, db_session):
     from homework_with_actions.src.models import Recipe
 
     recipe = db_session.query(Recipe).first()
+
 
     assert recipe.name == 'TestRecipeDB'

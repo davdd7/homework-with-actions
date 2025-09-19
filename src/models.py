@@ -1,15 +1,14 @@
-from sqlalchemy import Integer, String
-
+from sqlalchemy import String
 
 
 from sqlalchemy.orm import Mapped, mapped_column
 
 
-
-
 from homework_with_actions.src.database import Base
 
+
 class Recipe(Base):
+
     __tablename__ = 'recipes'
 
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
