@@ -7,7 +7,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 
 
 
-from src.database import Base
+from database import Base
 
 class Recipe(Base):
     __tablename__ = 'recipes'

@@ -3,7 +3,7 @@ from sqlalchemy import desc
 
 
 
-from src import schemas
+import schemas
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
@@ -14,10 +14,10 @@ from typing import List, Type
 
 from sqlalchemy.orm import Session
 
-from src import models
+import models
 
-from src.database import engine, async_session
-from src.models import Recipe
+from database import engine, async_session
+from models import Recipe
 
 
 @asynccontextmanager
