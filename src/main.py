@@ -2,9 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException, Path, status
 from sqlalchemy import desc
 
 
-
-
-import homework_with_actions.src.schemas
+from homework_with_actions.src import schemas
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
@@ -15,7 +13,7 @@ from typing import List, Type
 
 from sqlalchemy.orm import Session
 
-import homework_with_actions.src.models
+from homework_with_actions.src import models
 
 from homework_with_actions.src.database import engine, async_session
 from homework_with_actions.src.models import Recipe
