@@ -30,7 +30,7 @@ jobs:
         run: pytest tests
 
       - name: Run mypy
-        run: python -m mypy src/main.py --ignore-errors
+        run: python -m mypy src/main.py
     
       - name: Run black check
         run: black --diff --check .
