@@ -9,8 +9,8 @@ current_dir = Path(__file__).parent
 root_dir = current_dir.parent
 sys.path.insert(0, str(root_dir))
 
-from main import app, get_db
-from database import Base
+from src.main import app, get_db
+from src.database import Base
 
 
 TEST_DATABASE_URL = "sqlite:///:memory:"
