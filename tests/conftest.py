@@ -13,7 +13,7 @@ engine = create_engine(TEST_DATABASE_URL)
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope="session")
 def setup_db():
     Base.metadata.create_all(bind=engine)
     yield

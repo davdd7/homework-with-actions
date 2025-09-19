@@ -45,6 +45,7 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
         async with session.begin():
             yield session
 
+
 @app.post("/recipes", response_model=RecipesIn, status_code=status.HTTP_201_CREATED)
 async def post_recipes(recipe: RecipesIn, db: AsyncSession = Depends(get_db)) -> Recipe:
     """
@@ -65,14 +66,17 @@ async def recipes_first_page(db: AsyncSession = Depends(get_db)) -> List[Recipe 
     @param db: Открытие сессии к БД
     @return: Список объектов рецепта
     """
-    recipe = await db.execute(select(Recipe).order_by(desc(Recipe.show_count),
-                                                          Recipe.cooking_time))
+    recipe = await db.execute(
+        select(Recipe).order_by(desc(Recipe.show_count),Recipe.cooking_time)
+    )
     return list(recipe.scalars().all())
 
 
 @app.get("/recipes/{id}", response_model=RecipesSecondPage)
-async def recipes_second_page(id: int = Path(..., title='ID Рецепта в БД', ge=0),
-                              db: AsyncSession = Depends(get_db)) -> Recipe | None:
+async def recipes_second_page(
+        id: int = Path(..., title="ID Рецепта в БД", ge=0),
+        db: AsyncSession = Depends(get_db),
+) -> Recipe | None:
     """
     Запрос определенного рецепта
     @param id: ID рецепта в БД
@@ -89,4 +93,3 @@ async def recipes_second_page(id: int = Path(..., title='ID Рецепта в Б
 
     await db.commit()
     return recipe
-

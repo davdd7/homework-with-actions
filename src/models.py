@@ -9,7 +9,7 @@ from homework_with_actions.src.database import Base
 
 class Recipe(Base):
 
-    __tablename__ = 'recipes'
+    __tablename__ = "recipes"
 
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
     name: Mapped[str] = mapped_column(String(20), nullable=False)
