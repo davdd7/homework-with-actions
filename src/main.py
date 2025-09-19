@@ -67,15 +67,15 @@ async def recipes_first_page(db: AsyncSession = Depends(get_db)) -> List[Recipe 
     @return: Список объектов рецепта
     """
     recipe = await db.execute(
-        select(Recipe).order_by(desc(Recipe.show_count),Recipe.cooking_time)
+        select(Recipe).order_by(desc(Recipe.show_count), Recipe.cooking_time)
     )
     return list(recipe.scalars().all())
 
 
 @app.get("/recipes/{id}", response_model=RecipesSecondPage)
 async def recipes_second_page(
-        id: int = Path(..., title="ID Рецепта в БД", ge=0),
-        db: AsyncSession = Depends(get_db),
+    id: int = Path(..., title="ID Рецепта в БД", ge=0),
+    db: AsyncSession = Depends(get_db),
 ) -> Recipe | None:
     """
     Запрос определенного рецепта

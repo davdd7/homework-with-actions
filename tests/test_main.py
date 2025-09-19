@@ -6,7 +6,7 @@ def test_create_item(client):
             "ingredients": "test kapusta, test baklazhan",
             "description": "testim test",
             "cooking_time": 15,
-            "show_count": 0
+            "show_count": 0,
         },
     )
     assert response.status_code == 201
@@ -22,7 +22,7 @@ def test_bd(client, db_session):
             "ingredients": "test kapusta, test baklazhan",
             "description": "testim test",
             "cooking_time": 15,
-            "show_count": 0
+            "show_count": 0,
         },
     )
 
