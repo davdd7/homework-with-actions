@@ -3,6 +3,7 @@ from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from pathlib import Path
+import sys
 
 current_dir = Path(__file__).parent
 root_dir = current_dir.parent
