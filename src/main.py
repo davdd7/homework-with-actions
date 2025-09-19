@@ -8,7 +8,7 @@ from sqlalchemy.future import select
 
 
 from contextlib import asynccontextmanager, AbstractAsyncContextManager
-from typing import List, Type
+from typing import List, Type, AsyncGenerator
 
 from sqlalchemy.orm import Session
 
@@ -18,7 +18,7 @@ from homework_with_actions.src.models import Recipe, Base
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI) -> AbstractAsyncContextManager:
+async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     """
     Функция запуска и шатдауна приложения
     @param app: приложение FastAPI
@@ -33,7 +33,7 @@ async def lifespan(app: FastAPI) -> AbstractAsyncContextManager:
 app = FastAPI(lifespan=lifespan)
 
 
-async def get_db() -> Session:
+async def get_db() -> AsyncGenerator[AsyncSession, None]:
     """
     Открывает соединение для работы с БД
     @return: объект сессии
@@ -72,7 +72,7 @@ async def recipes_first_page(db: AsyncSession = Depends(get_db)) -> List[Recipe 
 
 @app.get('/recipes/{id}', response_model=RecipesSecondPage)
 async def recipes_second_page(id: int = Path(..., title='ID Рецепта в БД', ge=0),
-                              db: AsyncSession = Depends(get_db)) -> Type[Recipe | None]:
+                              db: AsyncSession = Depends(get_db)) -> Recipe | None:
     """
     Запрос определенного рецепта
     @param id: ID рецепта в БД
