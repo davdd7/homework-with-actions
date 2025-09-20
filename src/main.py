@@ -8,11 +8,8 @@ from sqlalchemy.future import select
 
 from homework_with_actions.src.database import async_session, engine
 from homework_with_actions.src.models import Base, Recipe
-from homework_with_actions.src.schemas import (
-    RecipesFirstPage,
-    RecipesIn,
-    RecipesSecondPage,
-)
+from homework_with_actions.src.schemas import (RecipesFirstPage, RecipesIn,
+                                               RecipesSecondPage)
 
 
 @asynccontextmanager

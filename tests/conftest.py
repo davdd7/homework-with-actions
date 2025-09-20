@@ -6,7 +6,6 @@ from sqlalchemy.orm import sessionmaker
 from homework_with_actions.src.database import Base
 from homework_with_actions.src.main import app, get_db
 
-
 TEST_DATABASE_URL = "sqlite:///:memory:"
 
 engine = create_engine(TEST_DATABASE_URL)
