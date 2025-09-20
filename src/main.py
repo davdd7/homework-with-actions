@@ -44,11 +44,15 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
             yield session
 
 
-@app.post("/recipes",
-          response_model=RecipesIn,
-          status_code=status.HTTP_201_CREATED,
-          )
-async def post_recipes(recipe: RecipesIn, db: AsyncSession = get_db_dependency()) -> Recipe:
+@app.post(
+    "/recipes",
+    response_model=RecipesIn,
+    status_code=status.HTTP_201_CREATED,
+)
+async def post_recipes(
+    recipe: RecipesIn,
+    db: AsyncSession = get_db_dependency(),
+) -> Recipe:
     """
     Отправка нового рецепта
     @param recipe: рецепт
@@ -60,8 +64,13 @@ async def post_recipes(recipe: RecipesIn, db: AsyncSession = get_db_dependency()
     return new_recipe
 
 
-@app.get("/recipes", response_model=List[RecipesFirstPage])
-async def recipes_first_page(db: AsyncSession = get_db_dependency()) -> List[Recipe | None]:
+@app.get(
+    "/recipes",
+    response_model=List[RecipesFirstPage],
+)
+async def recipes_first_page(
+    db: AsyncSession = get_db_dependency(),
+) -> List[Recipe | None]:
     """
     Получение списка рецептов с сортировкой
     @param db: Открытие сессии к БД
