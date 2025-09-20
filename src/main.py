@@ -15,6 +15,9 @@ from homework_with_actions.src.schemas import (
 )
 
 
+def get_db_dependency() -> AsyncSession:
+    return Depends(get_db)
+
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     """
@@ -41,8 +44,11 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
             yield session
 
 
-@app.post("/recipes", response_model=RecipesIn, status_code=status.HTTP_201_CREATED)
-async def post_recipes(recipe: RecipesIn, db: AsyncSession = Depends(get_db)) -> Recipe:
+@app.post("/recipes",
+          response_model=RecipesIn,
+          status_code=status.HTTP_201_CREATED,
+          )
+async def post_recipes(recipe: RecipesIn, db: AsyncSession = get_db_dependency()) -> Recipe:
     """
     Отправка нового рецепта
     @param recipe: рецепт
@@ -55,7 +61,7 @@ async def post_recipes(recipe: RecipesIn, db: AsyncSession = Depends(get_db)) ->
 
 
 @app.get("/recipes", response_model=List[RecipesFirstPage])
-async def recipes_first_page(db: AsyncSession = Depends(get_db)) -> List[Recipe | None]:
+async def recipes_first_page(db: AsyncSession = get_db_dependency()) -> List[Recipe | None]:
     """
     Получение списка рецептов с сортировкой
     @param db: Открытие сессии к БД
@@ -70,7 +76,7 @@ async def recipes_first_page(db: AsyncSession = Depends(get_db)) -> List[Recipe 
 @app.get("/recipes/{id}", response_model=RecipesSecondPage)
 async def recipes_second_page(
     id: int = Path(..., title="ID Рецепта в БД", ge=0),
-    db: AsyncSession = Depends(get_db),
+    db: AsyncSession = get_db_dependency(),
 ) -> Recipe | None:
     """
     Запрос определенного рецепта
