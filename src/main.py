@@ -15,10 +15,6 @@ from homework_with_actions.src.schemas import (
 )
 
 
-def get_db_dependency() -> AsyncSession:
-    return Depends(get_db)
-
-
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     """
@@ -45,6 +41,9 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
             yield session
 
 
+get_db_dependency = Depends(get_db)
+
+
 @app.post(
     "/recipes",
     response_model=RecipesIn,
@@ -52,7 +51,7 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
 )
 async def post_recipes(
     recipe: RecipesIn,
-    db: AsyncSession = get_db_dependency(),
+    db: AsyncSession = get_db_dependency,
 ) -> Recipe:
     """
     Отправка нового рецепта
@@ -70,7 +69,7 @@ async def post_recipes(
     response_model=List[RecipesFirstPage],
 )
 async def recipes_first_page(
-    db: AsyncSession = get_db_dependency(),
+    db: AsyncSession = get_db_dependency,
 ) -> List[Recipe | None]:
     """
     Получение списка рецептов с сортировкой
@@ -86,7 +85,7 @@ async def recipes_first_page(
 @app.get("/recipes/{id}", response_model=RecipesSecondPage)
 async def recipes_second_page(
     id: int = Path(..., title="ID Рецепта в БД", ge=0),
-    db: AsyncSession = get_db_dependency(),
+    db: AsyncSession = get_db_dependency,
 ) -> Recipe | None:
     """
     Запрос определенного рецепта
