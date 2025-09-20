@@ -1,18 +1,18 @@
 from contextlib import asynccontextmanager
-from typing import List, AsyncGenerator
+from typing import AsyncGenerator, List
 
-from fastapi import FastAPI, Depends, HTTPException, Path, status
+from fastapi import Depends, FastAPI, HTTPException, Path, status
 from sqlalchemy import desc
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
+from homework_with_actions.src.database import async_session, engine
+from homework_with_actions.src.models import Base, Recipe
 from homework_with_actions.src.schemas import (
-    RecipesIn,
     RecipesFirstPage,
+    RecipesIn,
     RecipesSecondPage,
 )
-from homework_with_actions.src.database import engine, async_session
-from homework_with_actions.src.models import Recipe, Base
 
 
 @asynccontextmanager

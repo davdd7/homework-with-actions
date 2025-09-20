@@ -3,8 +3,8 @@ from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from homework_with_actions.src.main import app, get_db
 from homework_with_actions.src.database import Base
+from homework_with_actions.src.main import app, get_db
 
 
 TEST_DATABASE_URL = "sqlite:///:memory:"
