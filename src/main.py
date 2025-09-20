@@ -18,6 +18,7 @@ from homework_with_actions.src.schemas import (
 def get_db_dependency() -> AsyncSession:
     return Depends(get_db)
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     """
