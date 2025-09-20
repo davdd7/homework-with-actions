@@ -4,6 +4,7 @@ from sqlalchemy.ext.asyncio import (
     async_sessionmaker,
     create_async_engine,
 )
+
 # isort: on
 from sqlalchemy.orm import DeclarativeBase
 
