@@ -82,9 +82,12 @@ async def recipes_first_page(
     return list(recipe.scalars().all())
 
 
+check_id = Path(..., title="ID Рецепта в БД", ge=0)
+
+
 @app.get("/recipes/{id}", response_model=RecipesSecondPage)
 async def recipes_second_page(
-    id: int = Path(..., title="ID Рецепта в БД", ge=0),
+    id: int = check_id,
     db: AsyncSession = get_db_dependency,
 ) -> Recipe | None:
     """
